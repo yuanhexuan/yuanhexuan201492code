@@ -53,11 +53,11 @@ export function ConsolePage() {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <Terminal className="w-6 h-6 text-[#557C55]" />
-          <h1 className="text-xl font-bold text-white">Server Console</h1>
+          <h1 className="text-xl font-bold text-white">服务器控制台</h1>
         </div>
       </div>
 
-      <div className="flex-1 bg-[#1A1A2E] rounded-xl p-4 overflow-hidden">
+      <div className="flex-1 bg-[#1A1A2E] rounded-xl p-4 overflow-hidden min-h-[400px]">
         <div className="h-full overflow-y-auto space-y-1 console-log pr-4">
           {logs.map((log) => (
             <div key={log.id} className={`text-sm ${
@@ -83,7 +83,7 @@ export function ConsolePage() {
               value={command}
               onChange={(e) => setCommand(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Enter command (e.g., help, list, say Hello)"
+              placeholder="输入命令 (如: help, list, say 你好)"
               className="w-full px-4 py-3 bg-[#252540] border border-[#444466] rounded-lg text-white placeholder:text-[#666666] focus:outline-none focus:border-[#557C55]"
               disabled={isLoading}
             />
@@ -94,11 +94,11 @@ export function ConsolePage() {
             className="px-6 py-3 bg-[#557C55] hover:bg-[#4A6E4A] disabled:bg-[#444444] disabled:cursor-not-allowed text-white rounded-lg flex items-center gap-2 transition-colors"
           >
             <Send className="w-5 h-5" />
-            Send
+            发送
           </button>
         </div>
         <div className="mt-2 text-xs text-[#666666]">
-          Available commands: help, list, say, players, stop
+          可用命令: help, list, say, players, stop
         </div>
       </div>
     </div>

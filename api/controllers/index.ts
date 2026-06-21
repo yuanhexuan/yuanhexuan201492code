@@ -1,4 +1,4 @@
-import db from './init.js';
+import db from '../db/init.js';
 
 let serverStatus = {
   running: false,
