@@ -4,7 +4,7 @@
 #define int long long
 using namespace std;
 
-// ç”ŸæˆæŒ‡å®šé•¿åº¦çš„éšæœºå­—ç¬¦ä¸²
+// Éú³ÉÖ¸¶¨³¤¶ÈµÄËæ»ú×Ö·û´®
 string randStr(int len) {
     string s = "";
     for (int i = 0; i < len; i++)
@@ -12,61 +12,61 @@ string randStr(int len) {
     return s;
 }
 
-// å¸¦é¢œè‰²çš„è¾“å‡º
+// ´øÑÕÉ«µÄÊä³ö
 void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-// æ‰“å°åˆ†éš”çº¿
+// ´òÓ¡·Ö¸ôÏß
 void printLine() {
     setColor(11);
     cout << "========================================\n";
     setColor(7);
 }
 
-// æ˜¾ç¤ºä¸»èœå•
+// ÏÔÊ¾Ö÷²Ëµ¥
 void showMenu(int RMB, int day) {
     system("cls");
     setColor(14);
-    cout << "  æ¬é±¼æ¸¸æˆ\n";
+    cout << "  °áÓãÓÎÏ·\n";
     setColor(11);
     cout << "  scirco.(R)\n";
     setColor(7);
     printLine();
     setColor(10);
-    cout << "  ç¬¬ " << day << " å¤©  |  ";
+    cout << "  µÚ " << day << " Ìì  |  ";
     setColor(14);
     cout << "RMB: " << RMB << "\n";
     setColor(7);
     printLine();
-    cout << "  1. è‚¡å¸‚\n";
-    cout << "  2. å½©ç¥¨\n";
-    cout << "  3. æ‰“å·¥èµšé’±\n";
-    cout << "  4. é“¶è¡Œå­˜å–\n";
-    cout << "  0. é€€å‡º\n";
+    cout << "  1. ¹ÉÊĞ\n";
+    cout << "  2. ²ÊÆ±\n";
+    cout << "  3. ´ò¹¤×¬Ç®\n";
+    cout << "  4. ÒøĞĞ´æÈ¡\n";
+    cout << "  0. ÍË³ö\n";
     printLine();
-    cout << "  è¯·é€‰æ‹©: ";
+    cout << "  ÇëÑ¡Ôñ: ";
 }
 
-// ===== è‚¡å¸‚ç³»ç»Ÿ =====
+// ===== ¹ÉÊĞÏµÍ³ =====
 void stockMarket(int &RMB) {
     vector<string> names = {"TECH", "FOOD", "ENER", "MEDC", "GOLD"};
-    vector<string> labels = {"ç§‘æŠ€", "é£Ÿå“", "èƒ½æº", "åŒ»è¯", "é»„é‡‘"};
+    vector<string> labels = {"¿Æ¼¼", "Ê³Æ·", "ÄÜÔ´", "Ò½Ò©", "»Æ½ğ"};
     vector<int> prices = {100, 50, 80, 120, 200};
-    map<string, int> hold; // æŒä»“æ•°é‡
+    map<string, int> hold; // ³Ö²ÖÊıÁ¿
 
     while (1) {
         system("cls");
         setColor(14);
-        cout << "  === è‚¡å¸‚ ===\n";
+        cout << "  === ¹ÉÊĞ ===\n";
         setColor(7);
         printLine();
-        cout << "  ä½ çš„RMB: " << RMB << "\n";
+        cout << "  ÄãµÄRMB: " << RMB << "\n";
         printLine();
-        cout << "  ä»£ç   åç§°  ä»·æ ¼    æ¶¨è·Œ  æŒæœ‰\n";
+        cout << "  ´úÂë  Ãû³Æ  ¼Û¸ñ    ÕÇµø  ³ÖÓĞ\n";
         cout << "  ----  ----  -----   ----  ----\n";
         for (int i = 0; i < 5; i++) {
-            // éšæœºæ¶¨è·Œ
+            // Ëæ»úÕÇµø
             int change = (rand() % 21 - 10); // -10% ~ +10%
             int oldPrice = prices[i];
             prices[i] = max(1LL, prices[i] * (100 + change) / 100);
@@ -74,66 +74,66 @@ void stockMarket(int &RMB) {
             cout << "  " << names[i] << "  " << labels[i] << "  ";
             setColor(14);
             cout << setw(5) << prices[i] << "   ";
-            if (actualChange > 0) setColor(12); // çº¢=æ¶¨
-            else if (actualChange < 0) setColor(10); // ç»¿=è·Œ
+            if (actualChange > 0) setColor(12); // ºì=ÕÇ
+            else if (actualChange < 0) setColor(10); // ÂÌ=µø
             else setColor(7);
             cout << setw(5) << actualChange << "  ";
             setColor(7);
             cout << setw(4) << hold[names[i]] << "\n";
         }
         printLine();
-        cout << "  1.ä¹°å…¥  2.å–å‡º  0.è¿”å›\n";
-        cout << "  è¯·é€‰æ‹©: ";
+        cout << "  1.ÂòÈë  2.Âô³ö  0.·µ»Ø\n";
+        cout << "  ÇëÑ¡Ôñ: ";
         int op;
         if (!(cin >> op)) { cin.clear(); cin.ignore(); continue; }
         if (op == 0) break;
-        if (op == 1) { // ä¹°å…¥
-            cout << "  è¾“å…¥è‚¡ç¥¨ä»£ç : ";
+        if (op == 1) { // ÂòÈë
+            cout << "  ÊäÈë¹ÉÆ±´úÂë: ";
             string code; cin >> code;
-            // è½¬å¤§å†™
+            // ×ª´óĞ´
             for (auto &c : code) c = toupper(c);
             int idx = -1;
             for (int i = 0; i < 5; i++) if (names[i] == code) idx = i;
-            if (idx == -1) { cout << "  æ— æ•ˆä»£ç !\n"; Sleep(1000); continue; }
-            cout << "  ä¹°å…¥æ•°é‡: ";
+            if (idx == -1) { cout << "  ÎŞĞ§´úÂë!\n"; Sleep(1000); continue; }
+            cout << "  ÂòÈëÊıÁ¿: ";
             int amt; cin >> amt;
-            if (amt <= 0) { cout << "  æ— æ•ˆæ•°é‡!\n"; Sleep(1000); continue; }
+            if (amt <= 0) { cout << "  ÎŞĞ§ÊıÁ¿!\n"; Sleep(1000); continue; }
             int cost = prices[idx] * amt;
-            if (cost > RMB) { cout << "  ä½™é¢ä¸è¶³! éœ€è¦ " << cost << " å…ƒ\n"; Sleep(1000); continue; }
+            if (cost > RMB) { cout << "  Óà¶î²»×ã! ĞèÒª " << cost << " Ôª\n"; Sleep(1000); continue; }
             RMB -= cost;
             hold[code] += amt;
-            cout << "  ä¹°å…¥ " << amt << " è‚¡ " << code << "ï¼ŒèŠ±è´¹ " << cost << " å…ƒ\n";
+            cout << "  ÂòÈë " << amt << " ¹É " << code << "£¬»¨·Ñ " << cost << " Ôª\n";
             Sleep(1000);
-        } else if (op == 2) { // å–å‡º
-            cout << "  è¾“å…¥è‚¡ç¥¨ä»£ç : ";
+        } else if (op == 2) { // Âô³ö
+            cout << "  ÊäÈë¹ÉÆ±´úÂë: ";
             string code; cin >> code;
             for (auto &c : code) c = toupper(c);
             int idx = -1;
             for (int i = 0; i < 5; i++) if (names[i] == code) idx = i;
-            if (idx == -1 || hold[code] == 0) { cout << "  æ— æŒä»“!\n"; Sleep(1000); continue; }
-            cout << "  å–å‡ºæ•°é‡(0=å…¨éƒ¨): ";
+            if (idx == -1 || hold[code] == 0) { cout << "  ÎŞ³Ö²Ö!\n"; Sleep(1000); continue; }
+            cout << "  Âô³öÊıÁ¿(0=È«²¿): ";
             int amt; cin >> amt;
             if (amt == 0) amt = hold[code];
-            if (amt <= 0 || amt > hold[code]) { cout << "  æ— æ•ˆæ•°é‡!\n"; Sleep(1000); continue; }
+            if (amt <= 0 || amt > hold[code]) { cout << "  ÎŞĞ§ÊıÁ¿!\n"; Sleep(1000); continue; }
             int revenue = prices[idx] * amt;
             RMB += revenue;
             hold[code] -= amt;
-            cout << "  å–å‡º " << amt << " è‚¡ " << code << "ï¼Œè·å¾— " << revenue << " å…ƒ\n";
+            cout << "  Âô³ö " << amt << " ¹É " << code << "£¬»ñµÃ " << revenue << " Ôª\n";
             Sleep(1000);
         }
     }
 }
 
-// ===== å½©ç¥¨ç³»ç»Ÿ =====
+// ===== ²ÊÆ±ÏµÍ³ =====
 void lottery(int &RMB) {
-    int cost = 10; // æ¯æ¬¡æŠ•æ³¨10å…ƒ
-    // ç”Ÿæˆ4ä½ä¸­å¥–å·ç 
+    int cost = 10; // Ã¿´ÎÍ¶×¢10Ôª
+    // Éú³É4Î»ÖĞ½±ºÅÂë
     string prize = randStr(4);
 
     while (1) {
         if (RMB < cost) {
             setColor(12);
-            cout << "  ä½™é¢ä¸è¶³ï¼Œæ— æ³•è´­ä¹°å½©ç¥¨! éœ€è¦ " << cost << " å…ƒ\n";
+            cout << "  Óà¶î²»×ã£¬ÎŞ·¨¹ºÂò²ÊÆ±! ĞèÒª " << cost << " Ôª\n";
             setColor(7);
             Sleep(1500);
             return;
@@ -141,140 +141,140 @@ void lottery(int &RMB) {
 
         system("cls");
         setColor(14);
-        cout << "  === å½©ç¥¨ ===\n";
+        cout << "  === ²ÊÆ± ===\n";
         setColor(7);
         printLine();
-        cout << "  ä½ çš„RMB: " << RMB << "\n";
-        cout << "  æŠ•æ³¨è´¹: " << cost << " å…ƒ/æ¬¡\n";
+        cout << "  ÄãµÄRMB: " << RMB << "\n";
+        cout << "  Í¶×¢·Ñ: " << cost << " Ôª/´Î\n";
         printLine();
 
-        // ç”Ÿæˆä½ çš„å·ç 
+        // Éú³ÉÄãµÄºÅÂë
         string your = randStr(4);
         RMB -= cost;
 
-        // è®¡ç®—åŒ¹é…ä½æ•°
+        // ¼ÆËãÆ¥ÅäÎ»Êı
         int match = 0;
         for (int i = 0; i < 4; i++)
             if (your[i] == prize[i]) match++;
 
-        cout << "  ä¸­å¥–å·ç : ";
+        cout << "  ÖĞ½±ºÅÂë: ";
         setColor(12);
         cout << prize << "\n";
         setColor(7);
-        cout << "  ä½ çš„å·ç : ";
+        cout << "  ÄãµÄºÅÂë: ";
         setColor(10);
         cout << your << "\n";
         setColor(7);
 
-        // å¥–é‡‘è§„åˆ™
+        // ½±½ğ¹æÔò
         int reward = 0;
         if (match == 4) {
             reward = 5000;
             setColor(14);
-            cout << "\n  *** å¤§å¥–! 4ä½å…¨ä¸­! ***\n";
+            cout << "\n  *** ´ó½±! 4Î»È«ÖĞ! ***\n";
         } else if (match == 3) {
             reward = 200;
             setColor(11);
-            cout << "\n  ** ä¸­äº†3ä½! ä¸é”™! **\n";
+            cout << "\n  ** ÖĞÁË3Î»! ²»´í! **\n";
         } else if (match == 2) {
             reward = 20;
             setColor(10);
-            cout << "\n  * ä¸­äº†2ä½! å°å¥–! *\n";
+            cout << "\n  * ÖĞÁË2Î»! Ğ¡½±! *\n";
         } else {
             setColor(7);
-            cout << "\n  ä¸­äº† " << match << " ä½ï¼Œå†æ¥å†å‰ã€‚\n";
+            cout << "\n  ÖĞÁË " << match << " Î»£¬ÔÙ½ÓÔÙÀ÷¡£\n";
         }
         setColor(7);
 
         if (reward > 0) {
             RMB += reward;
-            cout << "  ä½ èµ¢å¾—äº† " << reward << " å…ƒ!\n";
+            cout << "  ÄãÓ®µÃÁË " << reward << " Ôª!\n";
         }
-        cout << "  å½“å‰RMB: " << RMB << "\n";
+        cout << "  µ±Ç°RMB: " << RMB << "\n";
         printLine();
-        cout << "  1.å†æ¥ä¸€æ¬¡  0.è¿”å›\n";
-        cout << "  è¯·é€‰æ‹©: ";
+        cout << "  1.ÔÙÀ´Ò»´Î  0.·µ»Ø\n";
+        cout << "  ÇëÑ¡Ôñ: ";
         int op;
         if (!(cin >> op)) { cin.clear(); cin.ignore(); continue; }
         if (op != 1) break;
     }
 }
 
-// ===== å·¥ä½œç³»ç»Ÿ =====
+// ===== ¹¤×÷ÏµÍ³ =====
 void work(int &RMB, int &day) {
     system("cls");
     setColor(14);
-    cout << "  === æ‰“å·¥ ===\n";
+    cout << "  === ´ò¹¤ ===\n";
     setColor(7);
     printLine();
 
-    vector<string> jobs = {"é€å¤–å–", "æ”¶é“¶å‘˜", "å®¶æ•™", "ç¨‹åºå‘˜", "ç»ç†"};
+    vector<string> jobs = {"ËÍÍâÂô", "ÊÕÒøÔ±", "¼Ò½Ì", "³ÌĞòÔ±", "¾­Àí"};
     vector<int> pays = {50, 80, 120, 200, 350};
 
     for (int i = 0; i < 5; i++) {
         cout << "  " << i + 1 << ". " << jobs[i]
-             << "  è–ªèµ„: " << pays[i] << " å…ƒ\n";
+             << "  Ğ½×Ê: " << pays[i] << " Ôª\n";
     }
-    cout << "  0. è¿”å›\n";
+    cout << "  0. ·µ»Ø\n";
     printLine();
-    cout << "  ä½ çš„RMB: " << RMB << "\n";
-    cout << "  è¯·é€‰æ‹©: ";
+    cout << "  ÄãµÄRMB: " << RMB << "\n";
+    cout << "  ÇëÑ¡Ôñ: ";
 
     int op;
     if (!(cin >> op)) { cin.clear(); cin.ignore(); return; }
     if (op >= 1 && op <= 5) {
         int idx = op - 1;
         RMB += pays[idx];
-        cout << "  ä½ åšäº†" << jobs[idx] << "ï¼Œèµšäº† " << pays[idx] << " å…ƒ!\n";
+        cout << "  Äã×öÁË" << jobs[idx] << "£¬×¬ÁË " << pays[idx] << " Ôª!\n";
         day++;
-        cout << "  å¤©æ•°æ¨è¿›åˆ°ç¬¬ " << day << " å¤©\n";
+        cout << "  ÌìÊıÍÆ½øµ½µÚ " << day << " Ìì\n";
         Sleep(1500);
     }
 }
 
-// ===== é“¶è¡Œç³»ç»Ÿ =====
+// ===== ÒøĞĞÏµÍ³ =====
 void bank(int &RMB) {
     static int deposit = 0;
-    static double rate = 0.05; // 5% åˆ©ç‡
+    static double rate = 0.05; // 5% ÀûÂÊ
 
     while (1) {
         system("cls");
         setColor(14);
-        cout << "  === é“¶è¡Œ ===\n";
+        cout << "  === ÒøĞĞ ===\n";
         setColor(7);
         printLine();
-        cout << "  ç°é‡‘:     " << RMB << " å…ƒ\n";
-        cout << "  å­˜æ¬¾:     " << deposit << " å…ƒ\n";
-        cout << "  å¯é¢†åˆ©æ¯: " << (int)(deposit * rate) << " å…ƒ(5%)\n";
+        cout << "  ÏÖ½ğ:     " << RMB << " Ôª\n";
+        cout << "  ´æ¿î:     " << deposit << " Ôª\n";
+        cout << "  ¿ÉÁìÀûÏ¢: " << (int)(deposit * rate) << " Ôª(5%)\n";
         printLine();
-        cout << "  1.å­˜æ¬¾  2.å–æ¬¾  3.é¢†å–åˆ©æ¯  0.è¿”å›\n";
-        cout << "  è¯·é€‰æ‹©: ";
+        cout << "  1.´æ¿î  2.È¡¿î  3.ÁìÈ¡ÀûÏ¢  0.·µ»Ø\n";
+        cout << "  ÇëÑ¡Ôñ: ";
 
         int op;
         if (!(cin >> op)) { cin.clear(); cin.ignore(); continue; }
         if (op == 0) break;
         if (op == 1) {
-            cout << "  å­˜æ¬¾é‡‘é¢: ";
+            cout << "  ´æ¿î½ğ¶î: ";
             int amt; cin >> amt;
-            if (amt <= 0 || amt > RMB) { cout << "  æ— æ•ˆé‡‘é¢!\n"; Sleep(1000); continue; }
+            if (amt <= 0 || amt > RMB) { cout << "  ÎŞĞ§½ğ¶î!\n"; Sleep(1000); continue; }
             RMB -= amt;
             deposit += amt;
-            cout << "  å·²å­˜å…¥ " << amt << " å…ƒ\n";
+            cout << "  ÒÑ´æÈë " << amt << " Ôª\n";
             Sleep(1000);
         } else if (op == 2) {
-            cout << "  å–æ¬¾é‡‘é¢: ";
+            cout << "  È¡¿î½ğ¶î: ";
             int amt; cin >> amt;
-            if (amt <= 0 || amt > deposit) { cout << "  æ— æ•ˆé‡‘é¢!\n"; Sleep(1000); continue; }
+            if (amt <= 0 || amt > deposit) { cout << "  ÎŞĞ§½ğ¶î!\n"; Sleep(1000); continue; }
             deposit -= amt;
             RMB += amt;
-            cout << "  å·²å–å‡º " << amt << " å…ƒ\n";
+            cout << "  ÒÑÈ¡³ö " << amt << " Ôª\n";
             Sleep(1000);
         } else if (op == 3) {
             int interest = deposit * rate;
-            if (interest <= 0) { cout << "  æ²¡æœ‰åˆ©æ¯å¯é¢†!\n"; Sleep(1000); continue; }
+            if (interest <= 0) { cout << "  Ã»ÓĞÀûÏ¢¿ÉÁì!\n"; Sleep(1000); continue; }
             RMB += interest;
-            deposit += interest; // å¤åˆ©
-            cout << "  å·²é¢†å– " << interest << " å…ƒåˆ©æ¯!\n";
+            deposit += interest; // ¸´Àû
+            cout << "  ÒÑÁìÈ¡ " << interest << " ÔªÀûÏ¢!\n";
             Sleep(1000);
         }
     }
@@ -285,25 +285,25 @@ signed main() {
     int RMB = 1000;
     int day = 1;
 
-    system("title æ¬é±¼æ¸¸æˆ");
+    system("title °áÓãÓÎÏ·");
 
-    // å¼€åœº
+    // ¿ª³¡
     system("cls");
     setColor(14);
-    cout << "\n  æ¬é±¼æ¸¸æˆ\n";
+    cout << "\n  °áÓãÓÎÏ·\n";
     setColor(11);
     cout << "  scirco.(R)\n\n";
     setColor(7);
-    cout << "  åˆå§‹èµ„é‡‘ 1000 å…ƒ...\n";
+    cout << "  ³õÊ¼×Ê½ğ 1000 Ôª...\n";
     Sleep(2000);
 
     while (1) {
         if (RMB < 0) {
             system("cls");
             setColor(12);
-            cout << "\n  *** ä½ ç ´äº§äº†! ***\n\n";
+            cout << "\n  *** ÄãÆÆ²úÁË! ***\n\n";
             setColor(7);
-            cout << "  ä½ å­˜æ´»äº† " << day << " å¤©ã€‚\n";
+            cout << "  Äã´æ»îÁË " << day << " Ìì¡£\n";
             Sleep(3000);
             return 0;
         }
@@ -319,7 +319,7 @@ signed main() {
             case 3: work(RMB, day); break;
             case 4: bank(RMB); break;
             case 0:
-                cout << "  å†è§!\n";
+                cout << "  ÔÙ¼û!\n";
                 return 0;
             default: break;
         }
